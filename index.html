@@ -3,81 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinopsis de Artículos Científicos y de IA</title>
+    <title>Sinopsis de Artículos Científicos y de IA - Serenidad Profesional</title>
     <style>
-        /* CRÍTICO: Estilos para HTML y BODY */
+        /* --- Estilos con la paleta "Neutros Armoniosos y Enfoque Sutil" --- */
+
         html {
             margin: 0;
+            scroll-behavior: smooth; /* Adición para desplazamiento suave si hay anclas */
         }
         body {
-            margin: 0; /* ¡IMPORTANTE! */
+            margin: 0; 
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* ¡IMPORTANTE! */
+            min-height: 100vh; 
 
-            /* Otros estilos de body */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+            /* Paleta y Fuentes "Serenidad Profesional" */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8fafc; /* Fondo Principal: Gris muy claro cálido (similar a slate-50) */
+            color: #334155; /* Color de Texto Principal por defecto (similar a slate-700) */
             line-height: 1.6;
         }
 
-        /* Estilos del encabezado principal (no crítico para sticky footer pero parte del layout) */
         .encabezado-principal {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background-color: #334155; /* Fondo de Navegación: Gris oscuro/azul pizarra (similar a slate-700) */
+            color: #f1f5f9; /* Texto en Navegación: Blanco/Gris muy claro (similar a slate-100) */
             padding: 25px 20px;
             text-align: center;
-            /* margin-bottom: 30px; Ya no es tan necesario si main se expande */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            flex-shrink: 0; /* Para que el header no se encoja */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra sutil */
+            flex-shrink: 0;
         }
         .encabezado-principal h1 {
             margin: 0;
-            font-size: 2.8em;
-            font-weight: 300;
+            font-size: 2.5em; /* Ligeramente reducido para un look más moderno */
+            font-weight: 600; /* Un peso que denote importancia */
         }
 
-        /* CRÍTICO: Estilos para MAIN */
         main {
-            flex-grow: 1; /* ¡IMPORTANTE! Permite que esta sección crezca */
-            /* Padding para el contenido interno de main si es necesario */
-            padding-bottom: 30px; /* Espacio antes del footer */
+            flex-grow: 1; 
+            padding-bottom: 40px; /* Más espacio antes del footer */
         }
 
-        /* Estilos del contenedor de artículos y tarjetas (dentro de main) */
         #contenedor-articulos {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px;
-            padding: 20px; /* Padding solo para el contenido interno */
+            gap: 30px; /* Un poco más de espacio entre tarjetas */
+            padding: 30px 20px; /* Padding superior e inferior aumentado */
             justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto; /* Centra el contenedor si tiene max-width */
+            max-width: 1250px; /* Un poco más de ancho para el contenedor */
+            margin: 0 auto; 
         }
-        /* ... (tus estilos de .articulo-card sin cambios) ... */
+        
         .articulo-card {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 25px;
-            width: 320px;
+            background-color: #ffffff; /* Fondo de Tarjetas: Blanco puro */
+            border: 1px solid #e2e8f0; /* Borde Suave (similar a slate-200) */
+            border-radius: 12px; /* Bordes más redondeados y modernos */
+            box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Sombra sutil actualizada */
+            padding: 28px; /* Padding ligeramente ajustado */
+            width: 330px; 
             box-sizing: border-box;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
             flex-direction: column;
         }
         .articulo-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-7px); /* Efecto de elevación sutil */
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.07), 0 4px 8px -4px rgba(0, 0, 0, 0.07); /* Sombra sutil al hacer hover actualizada */
         }
-        .articulo-card h3 {
+        
+        .articulo-card h3 { /* Títulos en Tarjetas */
             margin-top: 0;
             margin-bottom: 12px;
-            font-size: 1.6em;
-            color: #3498db;
+            font-size: 1.35em; /* Ajustado para jerarquía fina */
+            color: #0369a1; /* Color Acento para Títulos: Azul (similar a sky-700) */
             font-weight: 600;
+            line-height: 1.3; /* Mejor espaciado para títulos de varias líneas */
         }
         .articulo-card h3 a {
             text-decoration: none;
@@ -85,80 +84,83 @@
         }
         .articulo-card h3 a:hover {
             text-decoration: underline;
-            color: #2980b9;
+            color: #0284c7; /* Azul más claro para hover (similar a sky-600) */
         }
-        .articulo-card p {
-            font-size: 0.95em;
-            color: #555;
-            margin-bottom: 15px;
+        
+        .articulo-card p { /* Texto Cuerpo en Tarjetas */
+            font-size: 0.9rem; /* Tamaño relativo para consistencia */
+            color: #475569; /* Gris pizarra un poco más claro para el cuerpo de la tarjeta (similar a slate-600) */
+            margin-bottom: 20px; /* Más espacio antes del botón */
             flex-grow: 1;
+            line-height: 1.55;
         }
-        .articulo-card .leer-mas {
+        
+        .articulo-card .leer-mas { /* Botones Primarios */
             display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
+            background-color: #0284c7; /* Acento Primario: Azul medio (similar a sky-600) */
+            color: #ffffff; 
+            padding: 10px 18px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 8px; 
+            font-weight: 500; 
             text-align: center;
             margin-top: auto;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
         .articulo-card .leer-mas:hover {
-            background-color: #2980b9;
+            background-color: #0369a1; /* Acento Primario (más oscuro): Azul (similar a sky-700) */
+            transform: translateY(-2px);
         }
+        
         #contenedor-articulos > p { /* Mensajes de carga o error */
             width: 100%;
             text-align: center;
-            font-size: 1.2em;
-            color: #777;
+            font-size: 1.1em;
+            color: #64748b; /* Texto Secundario: Gris medio (similar a slate-500) */
         }
 
-
-        /* CRÍTICO: Estilos para FOOTER */
         footer {
-            background-color: #2c3e50;
-            color: #bdc3c7;
-            padding: 30px 20px;
-            border-top: 4px solid #3498db;
+            background-color: #334155; /* Fondo de Navegación: Gris oscuro/azul pizarra (similar a slate-700) */
+            color: #cbd5e1; /* Texto Secundario en Fondos Oscuros (similar a slate-300) */
+            padding: 35px 20px; /* Un poco más de padding */
+            /* border-top: 1px solid #475569; /* Borde superior muy sutil (opcional, slate-600) */
             text-align: center;
             width: 100%; 
             box-sizing: border-box; 
-            flex-shrink: 0; /* ¡IMPORTANTE! Evita que el footer se encoja */
+            flex-shrink: 0;
         }
-        /* ... (tus otros estilos de .footer-content, .social-links, .copyright sin cambios) ... */
         .footer-content {
             max-width: 800px;
             margin: 0 auto;
         }
         .footer-content p {
-            margin: 8px 0;
-            font-size: 0.95em;
+            margin: 10px 0;
+            font-size: 0.9em; 
         }
         .footer-content .social-links {
             list-style: none;
             padding: 0;
-            margin: 15px 0;
+            margin: 18px 0; /* Más espacio vertical */
         }
         .footer-content .social-links li {
             display: inline-block;
-            margin: 0 12px;
+            margin: 0 14px; /* Un poco más de espacio horizontal */
         }
         .footer-content .social-links a {
-            color: #ecf0f1;
+            color: #0ea5e9; /* Enlaces con Acento Primario (similar a sky-500) */
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s ease;
         }
         .footer-content .social-links a:hover {
-            color: #3498db;
+            color: #38bdf8; /* Acento Primario más claro (similar a sky-400) */
             text-decoration: underline;
         }
         .footer-content .copyright {
-            font-size: 0.85em;
-            color: #95a5a6;
-            margin-top: 20px;
+            font-size: 0.82em; /* Ajustado */
+            color: #94a3b8; /* Texto Terciario en Fondos Oscuros (similar a slate-400) */
+            margin-top: 25px; /* Más espacio antes del copyright */
+            line-height: 1.4; /* Mejor espaciado para texto largo de copyright */
         }
 
     </style>
@@ -177,10 +179,10 @@
         <div class="footer-content">
             <p>Un proyecto de sinopsis de artículos de Ciencia e IA por:</p>
             <ul class="social-links">
-                <li><a href="www.linkedin.com/in/juansebastianguzman" target="_blank" rel="noopener noreferrer">Juan Sebastián Guzmán (LinkedIn)</a></li>
+                <li><a href="https://www.linkedin.com/in/juansebastianguzman" target="_blank" rel="noopener noreferrer">Juan Sebastián Guzmán (LinkedIn)</a></li>
                 <li><a href="https://www.linkedin.com/in/gladysc0990" target="_blank" rel="noopener noreferrer">Gladys Edith Cedeño (LinkedIn)</a></li>
             </ul>
-            <p class="copyright">&copy; 2025 Juan Guzman y Gladys Cedeño - Articulos de ambito cientificos sobre salud e Inteligencia artificial - Todos los derechos reservados</p>
+            <p class="copyright">&copy; 2025 Juan Guzman y Gladys Cedeño - Articulos de ambito cientificos sobre salud e Inteligencia artificial - Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -219,7 +221,7 @@
                     const readMoreLink = document.createElement('a');
                     readMoreLink.href = carpetaNormalizada + '/' + articulo.archivoHtml;
                     readMoreLink.className = 'leer-mas';
-                    readMoreLink.textContent = 'Leer resumen';
+                    readMoreLink.textContent = 'Leer resumen'; // Se mantiene el texto del botón que proporcionaste
 
                     card.appendChild(titleElement);
                     card.appendChild(descriptionElement);
