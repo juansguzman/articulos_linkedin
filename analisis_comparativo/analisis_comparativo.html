@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Comparativo de Salud Digital: Estonia, México, Panamá</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Intro: Text + Cards (HTML/CSS) - Goal: Orient - Interaction: Hover - Justification: Quick overview.
+        - Panorama: Text summaries. Comparative chart (Bar Chart.js) for Digitalization Level (qualitative). Goal: High-level comparison. Interaction: Tooltips. Justification: Visual overview.
+        - Culture/Adoption: Bar Chart (Chart.js) for Digital Literacy; Text for qualitative. - Goal: Compare literacy & cultural factors. - Interaction: Tabs. - Justification: Visual quantitative comparison, detailed qualitative.
+        - Citizen Access: HTML/CSS structured text, accordion. - Goal: Explain access pathways. - Interaction: Accordions. - Justification: Structured presentation.
+        - Tech Integration: Tabbed content for Public/Private; HTML Table for tech adoption. - Goal: Compare tech adoption. - Interaction: Tabs. - Justification: Clear tabular comparison, contextual details.
+        - Legal Framework: Interactive Cards (HTML/CSS). - Goal: Summarize laws. - Interaction: Hover effects. - Justification: Digestible legal info.
+        - Analysis/Challenges: Text, call-out boxes. - Goal: Summarize analysis. - Interaction: None. - Justification: Concise analytical points.
+        - Conclusions: Text. - Goal: Summarize findings. - Interaction: None. - Justification: Key takeaways.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .active-nav {
+            background-color: #0369a1; 
+            color: white;
+        }
+        .nav-item {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .nav-item:hover {
+            background-color: #0ea5e9; 
+            color: white;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .tab-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .tab-button.active {
+            background-color: #0ea5e9; 
+            color: white;
+            border-color: #0ea5e9; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex min-h-screen">
+
+    <aside class="w-64 bg-slate-700 text-slate-100 p-6 space-y-4 fixed top-0 left-0 h-full overflow-y-auto">
+        <h1 class="text-2xl font-bold text-sky-300 mb-6">Salud Digital</h1>
+        <nav>
+            <ul class="space-y-2">
+                <li><a class="nav-item block active-nav" data-section="inicio">Inicio</a></li>
+                <li><a class="nav-item block" data-section="panorama">Panorama Comparativo</a></li>
+                <li><a class="nav-item block" data-section="cultura">Cultura y Adopción</a></li>
+                <li><a class="nav-item block" data-section="acceso">Acceso Ciudadano</a></li>
+                <li><a class="nav-item block" data-section="integracion">Integración Tecnológica</a></li>
+                <li><a class="nav-item block" data-section="legal">Marco Legal</a></li>
+                <li><a class="nav-item block" data-section="analisis">Análisis y Desafíos</a></li>
+                <li><a class="nav-item block" data-section="conclusiones">Conclusiones</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="ml-64 flex-1 p-6 md:p-10 overflow-y-auto bg-slate-50">
+        
+        <section id="inicio" class="content-section active">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">Análisis Comparativo de Sistemas de Salud e Integración Tecnológica</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                Este análisis explora la transformación digital de los sistemas de salud en Estonia, México y Panamá. Estos países representan distintas etapas en la adopción tecnológica, reflejando sus contextos socioeconómicos y políticos. La aplicación busca ofrecer una visión interactiva de sus avances, desafíos y los factores culturales y legales que influyen en este proceso.
+            </p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card bg-white p-6 rounded-lg shadow-lg border border-sky-100">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">🇪🇪 Estonia: Líder Digital</h3>
+                    <p class="text-slate-600 text-sm">Un referente mundial con un sistema de salud altamente centralizado y digitalizado.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-lg border-amber-100">
+                    <h3 class="text-xl font-semibold text-amber-600 mb-2">🇲🇽 México: Avance Desigual</h3>
+                    <p class="text-slate-600 text-sm">Innovación digital incipiente y desigual, con un sistema mayormente analógico.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-lg border-emerald-100">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">🇵🇦 Panamá: Enfoque Específico</h3>
+                    <p class="text-slate-600 text-sm">En desarrollo, avances en telemedicina, desafíos en integración completa.</p>
+                </div>
+            </div>
+            <p class="mt-8 text-slate-600">
+                Utilice la navegación lateral para explorar las diferentes facetas de esta comparativa.
+            </p>
+        </section>
+
+        <section id="panorama" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">I. El Panorama de la Salud Digital</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                La transformación digital de la salud es un imperativo global. Esta sección introduce cómo Estonia, México y Panamá abordan este desafío, reflejando sus trayectorias y niveles de madurez digital.
+            </p>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-medium text-sky-600 mb-3">🇪🇪 Estonia: El Modelo de Nación Digital Integral</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Estonia es un líder global en gobernanza digital, con un sistema de salud altamente centralizado y digitalizado. El Sistema Nacional de Información de Salud (HIS) conecta a todos los proveedores, con un 95% de los datos médicos digitalizados. La infraestructura X-Road permite el intercambio seguro de datos, facilitando que el 99% de los servicios públicos, incluidos los de salud, sean digitales. Casi el 100% de los residentes tienen historia clínica digital y las recetas son electrónicas. Su éxito se basa en una visión a largo plazo, la e-ID y una gestión centralizada de datos.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-medium text-amber-600 mb-3">🇲🇽 México: Avances Digitales en un Sistema Fragmentado</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        En México, la innovación digital es incipiente y desigual. A pesar de la aprobación de la receta médica electrónica y la promoción de expedientes clínicos digitales, el sistema opera mayormente de forma analógica. Persisten desafíos en regulación, conectividad, interoperabilidad y ciberseguridad. El mercado de salud digital está creciendo, pero el acceso es desigual debido a una profunda brecha digital. La estrategia nacional es más reactiva, y la fragmentación del sistema público complica un enfoque cohesivo.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-medium text-emerald-600 mb-3">🇵🇦 Panamá: Un Sistema en Desarrollo con Foco en la Telemedicina</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Panamá está mejorando su sistema de salud digital, con la telemedicina como área clave, especialmente para enfermedades crónicas (Ley 203 de 2021). Existe una estrategia para el Expediente Clínico Electrónico (ECE), pero el control y acceso a datos por parte del paciente necesitan mejoras. El enfoque es más específico que una revisión integral. Los avances legislativos son positivos, pero la implementación y una mayor integración sistémica están en desarrollo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-slate-700 mb-4">Nivel de Digitalización General (Estimado)</h3>
+                 <p class="text-sm text-slate-600 mb-4">Esta gráfica representa una estimación cualitativa del nivel general de digitalización de los servicios de salud en cada país, basada en el informe. Un valor más alto indica mayor digitalización.</p>
+                <div class="chart-container">
+                    <canvas id="digitalizacionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="cultura" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">II. El Tejido Cultural y la Adopción Tecnológica</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                La cultura de una nación influye significativamente en la percepción de la salud y la receptividad a nuevas tecnologías. Esta sección explora estos factores en Estonia, México y Panamá, y cómo impactan la adopción de la salud digital. Se presenta un resumen de los factores culturales clave y una visualización de los niveles de alfabetización digital.
+            </p>
+
+            <div class="tabs-container mb-8">
+                <div class="flex border-b border-slate-300">
+                    <button class="tab-button py-2 px-4 text-slate-600 border-b-2 border-transparent hover:border-sky-500 hover:text-sky-600 focus:outline-none active" data-target="cultura-estonia">Estonia</button>
+                    <button class="tab-button py-2 px-4 text-slate-600 border-b-2 border-transparent hover:border-sky-500 hover:text-sky-600 focus:outline-none" data-target="cultura-mexico">México</button>
+                    <button class="tab-button py-2 px-4 text-slate-600 border-b-2 border-transparent hover:border-sky-500 hover:text-sky-600 focus:outline-none" data-target="cultura-panama">Panamá</button>
+                </div>
+
+                <div id="cultura-estonia" class="tab-content p-4 active">
+                    <h3 class="text-2xl font-medium text-sky-600 mb-3">🇪🇪 Estonia: Sociedad Digitalmente Nativa y Confiada</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                        <li><strong>Creencias de Salud:</strong> Tendencia al bienestar general, responsabilidad individual por la salud. Medicina familiar central en APS.</li>
+                        <li><strong>Alfabetización Digital:</strong> Alta (62.6% habilidades básicas). Internet como derecho humano. Mentalidad "primero digital".</li>
+                        <li><strong>Confianza:</strong> Alta en soluciones digitales y gobierno. Transparencia y control de datos del paciente (e-ID) son claves.</li>
+                        <li><strong>Dinámica Médico-Paciente:</strong> Proveedores de atención primaria como guardianes. Cultura de autonomía individual.</li>
+                        <li><strong>Impacto en Adopción:</strong> Muy positivo. Alta alfabetización y confianza facilitan e-salud integral y empoderamiento del paciente.</li>
+                    </ul>
+                </div>
+                <div id="cultura-mexico" class="tab-content p-4 hidden">
+                    <h3 class="text-2xl font-medium text-amber-600 mb-3">🇲🇽 México: Tradición, Desconfianza y Brecha Digital</h3>
+                     <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                        <li><strong>Creencias de Salud:</strong> Fuerte influencia de medicina tradicional (Curanderismo). Familia central en decisiones.</li>
+                        <li><strong>Alfabetización Digital:</strong> Brecha significativa (19% acceso rural a internet en 2020). Bajas habilidades TIC (31% básicas).</li>
+                        <li><strong>Confianza:</strong> Variable. Preocupaciones por seguridad de datos y falta de estrategia unificada. Baja adopción de IA por médicos.</li>
+                        <li><strong>Dinámica Médico-Paciente:</strong> Alto respeto a médicos (paternalismo). Se espera *personalismo*. Familia involucrada.</li>
+                        <li><strong>Impacto en Adopción:</strong> Desafiante. Brecha digital, creencias tradicionales y dinámicas de confianza requieren enfoques adaptados.</li>
+                    </ul>
+                </div>
+                <div id="cultura-panama" class="tab-content p-4 hidden">
+                    <h3 class="text-2xl font-medium text-emerald-600 mb-3">🇵🇦 Panamá: Conciencia Digital Emergente y Diversidad</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                        <li><strong>Creencias de Salud:</strong> Influencia de EE.UU. en sector privado. Disparidades en salud indígena. Preferencia por sector privado.</li>
+                        <li><strong>Alfabetización Digital:</strong> Penetración de internet 78.8% (2024), pero brechas en acceso y baja comprensión lectora.</li>
+                        <li><strong>Confianza:</strong> Aceptación de telemedicina. Bajo control de datos del paciente y necesidad de mejorar legislación de acceso a ECE.</li>
+                        <li><strong>Dinámica Médico-Paciente:</strong> Fuerte vínculo paciente-médico. Necesidad de comunicación culturalmente sensible.</li>
+                        <li><strong>Impacto en Adopción:</strong> Emergente. Telemedicina con buena acogida, pero se necesita mejorar gobernanza de datos y acceso equitativo.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-10 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-slate-700 mb-4">Nivel de Alfabetización Digital (Población con Habilidades Básicas)</h3>
+                <p class="text-sm text-slate-600 mb-4">Esta gráfica muestra el porcentaje de la población con habilidades digitales básicas, un factor crucial para la adopción de tecnologías de salud digital. Datos según el informe.</p>
+                <div class="chart-container">
+                    <canvas id="alfabetizacionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="acceso" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">III. Navegando la Atención Médica: Rutas de Acceso Ciudadano</h2>
+             <p class="mb-6 text-lg text-slate-700">
+                La forma en que los ciudadanos acceden a los servicios de salud varía enormemente. Esta sección detalla las rutas de acceso en los sectores público y privado, así como los servicios de emergencia en Estonia, México y Panamá, destacando el papel de las herramientas digitales.
+            </p>
+
+            <div class="accordion-container space-y-4">
+                <div class="accordion-item bg-white rounded-lg shadow">
+                    <button class="accordion-header w-full flex justify-between items-center p-4 text-left text-xl font-medium text-sky-600 hover:bg-sky-50 focus:outline-none">
+                        <span>🇪🇪 Estonia: El Viaje Digital del Paciente</span>
+                        <span class="arrow text-sky-500 transform transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="p-4 border-t border-slate-200">
+                            <p class="text-slate-700 mb-2"><strong>Acceso Público:</strong> Obligatorio registrarse con un médico de cabecera (GP). Solicitud digital o por correo. Remisión digital del GP para especialistas (con excepciones). Portal Terviseportaal.ee es central para citas, datos de salud, recetas. Inicio de sesión con e-ID o Mobile-ID.</p>
+                            <p class="text-slate-700 mb-2"><strong>Acceso Privado:</strong> Posible sin residencia oficial (costos propios si no hay EHIF). Mayormente integrados en sistema e-salud nacional vía X-Road.</p>
+                            <p class="text-slate-700"><strong>Emergencias (📞 112):</strong> Derecho para todos, gratuito (posible tarifa de visita de hasta 5€). Departamentos de emergencia en hospitales.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-white rounded-lg shadow">
+                    <button class="accordion-header w-full flex justify-between items-center p-4 text-left text-xl font-medium text-amber-600 hover:bg-amber-50 focus:outline-none">
+                        <span>🇲🇽 México: Enfoque Híbrido y Complejo</span>
+                        <span class="arrow text-amber-500 transform transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="p-4 border-t border-slate-200">
+                            <p class="text-slate-700 mb-2"><strong>Acceso Público:</strong>
+                                <br>- IMSS (trabajadores sector privado): Solicitud online/presencial. ECE en desarrollo.
+                                <br>- ISSSTE (empleados gobierno): Servicios online. CIS, RIS/PACS. Citas por teléfono/internet.
+                                <br>- IMSS-Bienestar (sin empleo formal): Atención y medicamentos "gratuitos". Desafíos en cobertura y calidad. Herramientas digitales limitadas.
+                            </p>
+                            <p class="text-slate-700 mb-2"><strong>Acceso Privado:</strong> Preferido por calidad percibida y menores esperas. Pago de bolsillo común. Tecnología variable según proveedor.</p>
+                            <p class="text-slate-700"><strong>Emergencias (📞 911 / Cruz Roja 065):</strong> Hospitales privados con pago por adelantado. Costos y esperas variables entre público y privado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-white rounded-lg shadow">
+                    <button class="accordion-header w-full flex justify-between items-center p-4 text-left text-xl font-medium text-emerald-600 hover:bg-emerald-50 focus:outline-none">
+                        <span>🇵🇦 Panamá: Canales Duales y en Desarrollo</span>
+                        <span class="arrow text-emerald-500 transform transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="p-4 border-t border-slate-200">
+                            <p class="text-slate-700 mb-2"><strong>Acceso Público:</strong>
+                                <br>- CSS (Caja de Seguro Social; empleados): Servicios digitales como "Mi Caja Digital", citas web "Citas.css.gob.pa", "Cajetina" (Telegram).
+                                <br>- MINSA (Ministerio de Salud; población general): Servicios de bajo costo. Guía de SEIS para profesionales; herramientas para pacientes menos desarrolladas. Largas esperas comunes.
+                            </p>
+                            <p class="text-slate-700 mb-2"><strong>Acceso Privado:</strong> Preferido por calidad y personal bilingüe. Hospitales con afiliaciones a EE.UU. Citas online/telefónicas. Pago por adelantado frecuente.</p>
+                            <p class="text-slate-700"><strong>Emergencias (📞 911):</strong> Universal. Hospitales privados y públicos con atención de emergencia. Servicios de ambulancia MINSA o privados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="integracion" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">IV. Integración Tecnológica en la Prestación de Servicios</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                La adopción de Expedientes Clínicos Electrónicos (ECE), telemedicina y portales de pacientes es clave para modernizar la salud. Esta sección compara la implementación de estas tecnologías en los sectores público y privado de los tres países, con un resumen tabular para una visión rápida.
+            </p>
+
+            <div class="tabs-container mb-8">
+                <div class="flex border-b border-slate-300">
+                    <button class="tab-button py-2 px-4 text-slate-600 border-b-2 border-transparent hover:border-sky-500 hover:text-sky-600 focus:outline-none active" data-target="integracion-publico">Sector Público</button>
+                    <button class="tab-button py-2 px-4 text-slate-600 border-b-2 border-transparent hover:border-sky-500 hover:text-sky-600 focus:outline-none" data-target="integracion-privado">Sector Privado</button>
+                </div>
+
+                <div id="integracion-publico" class="tab-content p-4 active space-y-6">
+                    <div>
+                        <h4 class="text-xl font-semibold text-sky-600 mb-2">🇪🇪 Estonia</h4>
+                        <p class="text-slate-700">Ecosistema maduro y totalmente integrado. EHIS centralizado (99% datos digitalizados, Blockchain KSI). e-Recetas universales. Portal Terviseportaal.ee. X-Road para intercambio de datos. e-Ambulance y telemedicina generalizada.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-amber-600 mb-2">🇲🇽 México</h4>
+                        <p class="text-slate-700">IMSS avanzando en ECE (53.7M registros). ISSSTE con CIS, RIS/PACS. Telemedicina crucial en áreas rurales. e-Recetas legalizadas, implementación en progreso. Falta infraestructura nacional unificada e interoperable.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-emerald-600 mb-2">🇵🇦 Panamá</h4>
+                        <p class="text-slate-700">Telemedicina clave (Ley 203). Estrategia ECE nacional, pero sistemas MINSA/CSS a menudo no interoperables. CSS con servicios digitales ("Mi Caja Digital", citas web). Desafíos en control de datos del paciente y apoyo institucional.</p>
+                    </div>
+                </div>
+
+                <div id="integracion-privado" class="tab-content p-4 hidden space-y-6">
+                    <div>
+                        <h4 class="text-xl font-semibold text-sky-600 mb-2">🇪🇪 Estonia</h4>
+                        <p class="text-slate-700">Participación temprana en digitalización. Proveedores privados conectados a X-Road y EHIS nacional. Servicios mayormente por entidades privadas contratadas por EHIF.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-amber-600 mb-2">🇲🇽 México</h4>
+                        <p class="text-slate-700">Creciente adopción de ECE en hospitales urbanos. Telemedicina utilizada. Algunos portales de pacientes. Desafíos: costos, resistencia al cambio, falta de interoperabilidad con sector público.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-emerald-600 mb-2">🇵🇦 Panamá</h4>
+                        <p class="text-slate-700">Captación significativa de telemedicina. Hospitales privados actualizando infraestructura (eHospital, Proyecto AVANTI). Portales de resultados online. Desafíos: interoperabilidad, derechos de acceso a datos.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-medium text-slate-700 mt-8 mb-4">Tabla Comparativa de Adopción Tecnológica (Resumen)</h3>
+            <div class="overflow-x-auto bg-white p-4 rounded-lg shadow">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">País</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">ECE Nacional (Público)</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">e-Receta (Público)</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Portal Paciente (Público)</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Telemedicina (Público)</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Intercambio Datos (Nacional)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-200 text-sm text-slate-700">
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap font-medium">🇪🇪 Estonia</td>
+                            <td class="px-4 py-2">Universal (EHIS)</td>
+                            <td class="px-4 py-2">100% Digital</td>
+                            <td class="px-4 py-2">Terviseportaal.ee</td>
+                            <td class="px-4 py-2">Integrada</td>
+                            <td class="px-4 py-2">X-Road (Obligatorio)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap font-medium">🇲🇽 México</td>
+                            <td class="px-4 py-2">Fragmentado (IMSS, ISSSTE)</td>
+                            <td class="px-4 py-2">En progreso</td>
+                            <td class="px-4 py-2">Limitado/Fragmentado</td>
+                            <td class="px-4 py-2">Iniciativas rurales</td>
+                            <td class="px-4 py-2">Inexistente/Desafíos</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap font-medium">🇵🇦 Panamá</td>
+                            <td class="px-4 py-2">En desarrollo (Interoperabilidad limitada)</td>
+                            <td class="px-4 py-2">No detallado</td>
+                            <td class="px-4 py-2">CSS (Mi Caja Digital)</td>
+                            <td class="px-4 py-2">Programa Nacional</td>
+                            <td class="px-4 py-2">Desafíos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <p class="text-xs text-slate-500 mt-2">Nota: Esta tabla es un resumen simplificado basado en el informe. "No detallado" indica que la información no se especificó prominentemente para ese aspecto en el informe fuente.</p>
+        </section>
+
+        <section id="legal" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">V. El Marco Legal y Regulatorio</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                Un marco legal robusto es esencial para la salud digital. Esta sección presenta las legislaciones clave en Estonia, México y Panamá relacionadas con la protección de datos, ECE y telemedicina.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card bg-white p-6 rounded-lg shadow-lg border border-sky-100">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">🇪🇪 Estonia: Gobernanza Digital Integral</h3>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>RGPD de la UE:</strong> Impacto directo en protección de datos.</p>
+                        <p><strong>Ley de Protección de Datos Personales (PDPA):</strong> Designa autoridad supervisora. Pacientes dueños de sus datos, pueden ver accesos (opt-out para compartir con fines de tratamiento).</p>
+                        <p><strong>Gobernanza de X-Road:</strong> Crítica para interoperabilidad, integridad y privacidad.</p>
+                        <p><strong>Telemedicina:</strong> Regulada en marco sanitario amplio, reembolsos por EHIF.</p>
+                    </div>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-lg border border-amber-100">
+                    <h3 class="text-xl font-semibold text-amber-600 mb-3">🇲🇽 México: Marcos en Desarrollo</h3>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Ley General de Salud:</strong> Pilar para dispositivos médicos. Reformas para RME e integración TIC.</p>
+                        <p><strong>NOM-024-SSA3-2012 (ECE):</strong> Objetivos funcionales, interoperabilidad (HL7, XML), seguridad. CURP como identificador.</p>
+                        <p><strong>LFPDPPP (Protección de Datos Sector Privado):</strong> Requiere consentimiento (expreso para datos de salud). Derechos ARCO.</p>
+                        <p><strong>COFEPRIS:</strong> Regula dispositivos médicos y SaMD.</p>
+                    </div>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-lg border border-emerald-100">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-3">🇵🇦 Panamá: Construyendo Infraestructura Legal</h3>
+                     <div class="space-y-2 text-sm">
+                        <p><strong>Ley 203 de 2021 (Telemedicina):</strong> Directrices para telesalud, consentimiento informado, registro en ECE.</p>
+                        <p><strong>Ley 81 de 2019 (Protección de Datos):</strong> Principios, derechos ARCO. Consentimiento explícito para datos sensibles. Supervisión por ANTAI y AIG.</p>
+                        <p><strong>Legislación ECE:</strong> Estrategia nacional existe. Ley 68 de 2003 (derechos del paciente). Marco integral en evolución.</p>
+                        <p><strong>Ley 419 de 2024 (Productos Médicos):</strong> Moderniza regulación, agiliza acceso a tecnologías.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="analisis" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">VI. Análisis Comparativo: Brechas y Fomento a la Innovación</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                Esta sección evalúa la efectividad de las políticas de salud digital, los desafíos en la digitalización y las lecciones aprendidas, especialmente del modelo estonio, para México y Panamá.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-medium text-slate-700 mb-4">Efectividad de Políticas y Desafíos</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold text-sky-600 mb-2">🇪🇪 Estonia</h4>
+                            <p class="text-slate-700"><strong>Efectividad:</strong> Alta (visión a largo plazo, infraestructura, confianza, alfabetización).</p>
+                            <p class="text-slate-700"><strong>Desafíos:</strong> Mantener vanguardia, usabilidad, ciberseguridad, cerrar pequeña brecha digital.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-amber-600 mb-2">🇲🇽 México</h4>
+                            <p class="text-slate-700"><strong>Efectividad:</strong> Mixta (avances en IMSS/ISSSTE, pero falta estrategia unificada, brecha digital limita impacto).</p>
+                            <p class="text-slate-700"><strong>Desafíos:</strong> Brecha digital masiva, falta de infraestructura, interoperabilidad, lagunas regulatorias, financiamiento.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-emerald-600 mb-2">🇵🇦 Panamá</h4>
+                            <p class="text-slate-700"><strong>Efectividad:</strong> Selectiva (telemedicina). Leyes de telemedicina y datos son buena base.</p>
+                            <p class="text-slate-700"><strong>Desafíos:</strong> Equidad, control de datos del paciente, interoperabilidad ECE, financiamiento, apoyo institucional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-sky-50 p-6 rounded-lg shadow">
+                    <h3 class="text-2xl font-medium text-sky-700 mb-4">💡 Lecciones del Modelo de Estonia</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                        <li>Visión digital nacional clara y a largo plazo con voluntad política.</li>
+                        <li>Construir infraestructura digital fundamental (e-ID, capa de interoperabilidad) como prerrequisito.</li>
+                        <li>Gobernanza centralizada de componentes clave de salud digital.</li>
+                        <li>Priorizar la confianza del paciente (transparencia, propiedad de datos, seguridad).</li>
+                        <li>Inversión en alfabetización digital nacional.</li>
+                        <li>Comenzar con servicios de alto impacto y fáciles de usar.</li>
+                        <li>Garantizar inclusión y cerrar la brecha digital.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusiones" class="content-section">
+            <h2 class="text-3xl font-semibold text-sky-700 mb-6">VII. Conclusiones y Consideraciones Estratégicas</h2>
+            <p class="mb-6 text-lg text-slate-700">
+                Este análisis revela trayectorias distintas en la integración tecnológica en salud. Estonia lidera con una infraestructura robusta y alta confianza. México enfrenta fragmentación y una brecha digital. Panamá avanza en áreas específicas pero necesita mayor interoperabilidad. A continuación, se presentan las principales conclusiones y consideraciones estratégicas.
+            </p>
+
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-medium text-slate-700 mb-3">Recapitulación de Hallazgos Clave</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-700 leading-relaxed">
+                        <li><strong>Estonia:</strong> Líder con infraestructura digital temprana (e-ID, X-Road), alta confianza ciudadana, control del paciente sobre datos y marco legal cohesivo.</li>
+                        <li><strong>México:</strong> "Semidigitalización" con potencial, pero obstaculizado por fragmentación, profunda brecha digital, y desafíos en interoperabilidad y gobernanza de datos.</li>
+                        <li><strong>Panamá:</strong> Progreso en telemedicina y protección de datos. Necesita desarrollar interoperabilidad de ECE, mejorar control de datos del paciente y asegurar acceso digital equitativo.</li>
+                        <li>La cultura influye: sociedad digital nativa de Estonia vs. necesidad de México de navegar tradiciones y brecha de confianza, y el imperativo de Panamá de adaptar soluciones a diversidad cultural.</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-medium text-slate-700 mt-10 mb-3">Consideraciones Estratégicas de Alto Nivel</h3>
+                    <div class="accordion-container space-y-4">
+                        <div class="accordion-item bg-white rounded-lg shadow">
+                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left text-xl font-medium text-amber-600 hover:bg-amber-50 focus:outline-none">
+                                <span>🇲🇽 Para México (Semidigital con disparidades)</span>
+                                <span class="arrow text-amber-500 transform transition-transform duration-300">▼</span>
+                            </button>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <ul class="list-disc p-4 pl-8 border-t border-slate-200 text-slate-700 space-y-1">
+                                    <li>Priorizar una estrategia nacional de salud digital cohesiva.</li>
+                                    <li>Inversiones sustanciales para cerrar la brecha digital (infraestructura, alfabetización, asequibilidad).</li>
+                                    <li>Establecer y hacer cumplir estándares de interoperabilidad obligatorios.</li>
+                                    <li>Fortalecer gobernanza de datos y ciberseguridad para construir confianza.</li>
+                                    <li>Diseñar soluciones culturalmente relevantes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white rounded-lg shadow">
+                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left text-xl font-medium text-emerald-600 hover:bg-emerald-50 focus:outline-none">
+                                <span>🇵🇦 Para Panamá (En desarrollo, progreso selectivo)</span>
+                                <span class="arrow text-emerald-500 transform transition-transform duration-300">▼</span>
+                            </button>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <ul class="list-disc p-4 pl-8 border-t border-slate-200 text-slate-700 space-y-1">
+                                    <li>Expandir una gama completa de servicios de salud digital a nivel nacional.</li>
+                                    <li>Desarrollar e implementar un ECE nacional robusto e interoperable.</li>
+                                    <li>Fortalecer derechos de pacientes sobre sus datos digitales (acceso, consentimiento, control).</li>
+                                    <li>Fomentar APP estratégicas para innovación y tecnología.</li>
+                                    <li>Invertir en capacitación digital para profesionales y población.</li>
+                                </ul>
+                            </div>
+                        </div>
+                         <div class="accordion-item bg-white rounded-lg shadow">
+                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left text-xl font-medium text-sky-600 hover:bg-sky-50 focus:outline-none">
+                                <span>🌍 Lecciones Generales (Inspiradas en Estonia)</span>
+                                 <span class="arrow text-sky-500 transform transition-transform duration-300">▼</span>
+                            </button>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <ul class="list-disc p-4 pl-8 border-t border-slate-200 text-slate-700 space-y-1">
+                                    <li>Establecer identidad digital segura y universal.</li>
+                                    <li>Implementar capa de intercambio de datos universal y segura (tipo X-Road).</li>
+                                    <li>Enfocar diseño en el paciente, promoviendo transparencia y propiedad de datos.</li>
+                                    <li>Adoptar enfoque gradual, comenzando con servicios de alto valor y fáciles de usar.</li>
+                                    <li>Asegurar marco legal habilitador y protector.</li>
+                                    <li>Mantener inversión continua en alfabetización digital y capacitación.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-8 text-slate-600">
+                    La transformación digital de la salud es un viaje complejo. Aprendiendo de pioneros y abordando desafíos contextuales, los países pueden avanzar hacia sistemas más eficientes, equitativos y centrados en el paciente.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('aside nav ul li a');
+            const sections = document.querySelectorAll('.content-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetSectionId = this.getAttribute('data-section');
+                    sections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(targetSectionId).classList.add('active');
+                    navLinks.forEach(navLink => navLink.classList.remove('active-nav'));
+                    this.classList.add('active-nav');
+                    document.querySelector('main').scrollTop = 0;
+                });
+            });
+            
+            const tabContainers = document.querySelectorAll('.tabs-container');
+            tabContainers.forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                 const tabContents = Array.from(container.parentElement.querySelectorAll('.tab-content')).filter(tc => tc.id.startsWith(container.querySelector('.tab-button').dataset.target.split('-')[0]));
+
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const targetId = this.dataset.target;
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        tabContents.forEach(content => {
+                            content.classList.add('hidden');
+                            content.classList.remove('active');
+                            if (content.id === targetId) {
+                                content.classList.remove('hidden');
+                                content.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            });
+
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.arrow');
+                    const isOpening = !content.style.maxHeight;
+                    
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                       if (item !== content && item.style.maxHeight) {
+                           item.style.maxHeight = null;
+                           item.previousElementSibling.querySelector('.arrow').classList.remove('rotate-180');
+                       }
+                    });
+
+                    if (isOpening) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        arrow.classList.add('rotate-180');
+                    } else {
+                        content.style.maxHeight = null;
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+            });
+            
+            function formatLabel(str, maxwidth){
+                let sections = [];
+                let words = str.split(" ");
+                let temp = "";
+                words.forEach(function(item, index){
+                    if(temp.length > 0) temp = temp + " " + item;
+                    else temp = item;
+                    if(temp.length > maxwidth){
+                        sections.push(temp); temp = "";
+                    }
+                    if(index == words.length - 1 && temp.length > 0) sections.push(temp);
+                });
+                return sections;
+            }
+
+            const digitalizacionCtx = document.getElementById('digitalizacionChart')?.getContext('2d');
+            if (digitalizacionCtx) {
+                new Chart(digitalizacionCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Estonia', 'México', 'Panamá'],
+                        datasets: [{
+                            label: 'Nivel de Digitalización Estimado (Escala 1-10)',
+                            data: [9, 4, 6], 
+                            backgroundColor: ['rgba(3, 105, 161, 0.7)', 'rgba(202, 138, 4, 0.7)', 'rgba(5, 150, 105, 0.7)'],
+                            borderColor: ['rgba(3, 105, 161, 1)', 'rgba(202, 138, 4, 1)', 'rgba(5, 150, 105, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: 'Nivel Estimado (1=Bajo, 10=Alto)'}},
+                                  x: { ticks: { callback: function(value, index, values) { return formatLabel(this.getLabelForValue(value), 16); }}}
+                        },
+                        plugins: { legend: { display: true, position: 'top'}, tooltip: {enabled: true}}
+                    }
+                });
+            }
+
+            const alfabetizacionCtx = document.getElementById('alfabetizacionChart')?.getContext('2d');
+            if (alfabetizacionCtx) {
+                new Chart(alfabetizacionCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Estonia', 'México', 'Panamá (Penetración Internet)*'],
+                        datasets: [{
+                            label: '% Población con Habilidades Digitales Básicas / Penetración Internet',
+                            data: [62.6, 31, 78.8], 
+                            backgroundColor: ['rgba(3, 105, 161, 0.7)', 'rgba(202, 138, 4, 0.7)', 'rgba(5, 150, 105, 0.7)'],
+                            borderColor: ['rgba(3, 105, 161, 1)', 'rgba(202, 138, 4, 1)', 'rgba(5, 150, 105, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                        scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: 'Porcentaje (%)'}},
+                                  y: { ticks: { callback: function(value, index, values) { return formatLabel(this.getLabelForValue(value), 16); }}}
+                        },
+                        plugins: { legend: { display: true, position: 'top'}, 
+                                   tooltip: { callbacks: { label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) label += ': ';
+                                        if (context.parsed.x !== null) label += context.parsed.x + '%';
+                                        if (context.label === 'Panamá (Penetración Internet)*') label += ' (*Penetración de Internet. Alfabetización digital específica con brechas.)';
+                                        return label;
+                                   }}}
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinopsis de Artículos Científicos y de IA</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <h1>Mis Sinopsis de Ciencia e IA 🔬🤖</h1>
+
+    <ul id="lista-articulos">
+        </ul>
+
+    <script>
+        // Script para cargar los artículos desde articulos.json
+        fetch('articulos.json') // Solicita el archivo articulos.json
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar articulos.json: ' + response.statusText);
+                }
+                return response.json(); // Convierte la respuesta a JSON
+            })
+            .then(articulos => {
+                const listaArticulosElemento = document.getElementById('lista-articulos');
+                if (articulos.length === 0) {
+                    listaArticulosElemento.innerHTML = '<li>No hay artículos disponibles por el momento.</li>';
+                    return;
+                }
+
+                articulos.forEach(articulo => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = articulo.carpeta + '/'; // Asume que dentro de cada carpeta hay un index.html
+                    link.textContent = articulo.titulo;
+                    
+                    // Opcional: Añadir descripción
+                    // const description = document.createElement('p');
+                    // description.textContent = articulo.descripcion;
+                    // description.style.fontSize = '0.9em';
+                    // description.style.color = '#555';
+
+                    listItem.appendChild(link);
+                    // listItem.appendChild(description); // Descomentar si usas la descripción
+                    listaArticulosElemento.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error al procesar los artículos:', error);
+                const listaArticulosElemento = document.getElementById('lista-articulos');
+                listaArticulosElemento.innerHTML = '<li>Ocurrió un error al cargar la lista de artículos.</li>';
+            });
+    </script>
+</body>
+</html>
