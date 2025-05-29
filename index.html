@@ -4,51 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sinopsis de Artículos Científicos y de IA</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        /* CRÍTICO: Estilos para HTML y BODY */
+        html {
+            margin: 0;
+        }
+        body {
+            margin: 0; /* ¡IMPORTANTE! */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* ¡IMPORTANTE! */
+
+            /* Otros estilos de body */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Estilos del encabezado principal (no crítico para sticky footer pero parte del layout) */
+        .encabezado-principal {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 25px 20px;
+            text-align: center;
+            /* margin-bottom: 30px; Ya no es tan necesario si main se expande */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-shrink: 0; /* Para que el header no se encoja */
+        }
+        .encabezado-principal h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 300;
+        }
+
+        /* CRÍTICO: Estilos para MAIN */
+        main {
+            flex-grow: 1; /* ¡IMPORTANTE! Permite que esta sección crezca */
+            /* Padding para el contenido interno de main si es necesario */
+            padding-bottom: 30px; /* Espacio antes del footer */
+        }
+
+        /* Estilos del contenedor de artículos y tarjetas (dentro de main) */
+        #contenedor-articulos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 20px; /* Padding solo para el contenido interno */
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto; /* Centra el contenedor si tiene max-width */
+        }
+        /* ... (tus estilos de .articulo-card sin cambios) ... */
+        .articulo-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            width: 320px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .articulo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        .articulo-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            color: #3498db;
+            font-weight: 600;
+        }
+        .articulo-card h3 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .articulo-card h3 a:hover {
+            text-decoration: underline;
+            color: #2980b9;
+        }
+        .articulo-card p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .articulo-card .leer-mas {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: auto;
+            transition: background-color 0.2s ease;
+        }
+        .articulo-card .leer-mas:hover {
+            background-color: #2980b9;
+        }
+        #contenedor-articulos > p { /* Mensajes de carga o error */
+            width: 100%;
+            text-align: center;
+            font-size: 1.2em;
+            color: #777;
+        }
+
+
+        /* CRÍTICO: Estilos para FOOTER */
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            padding: 30px 20px;
+            border-top: 4px solid #3498db;
+            text-align: center;
+            width: 100%; 
+            box-sizing: border-box; 
+            flex-shrink: 0; /* ¡IMPORTANTE! Evita que el footer se encoja */
+        }
+        /* ... (tus otros estilos de .footer-content, .social-links, .copyright sin cambios) ... */
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer-content p {
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+        .footer-content .social-links {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .footer-content .social-links li {
+            display: inline-block;
+            margin: 0 12px;
+        }
+        .footer-content .social-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .footer-content .social-links a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        .footer-content .copyright {
+            font-size: 0.85em;
+            color: #95a5a6;
+            margin-top: 20px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Mis Sinopsis de Ciencia e IA 🔬🤖</h1>
+    <header class="encabezado-principal">
+        <h1>Mis Sinopsis de Ciencia e IA 🔬🤖</h1>
+    </header>
 
-    <ul id="lista-articulos">
-        </ul>
+    <main>
+        <div id="contenedor-articulos">
+            </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Un proyecto de sinopsis de artículos de Ciencia e IA por:</p>
+            <ul class="social-links">
+                <li><a href="www.linkedin.com/in/juansebastianguzman" target="_blank" rel="noopener noreferrer">Juan Sebastián Guzmán (LinkedIn)</a></li>
+                <li><a href="https://www.linkedin.com/in/gladysc0990" target="_blank" rel="noopener noreferrer">Gladys Edith Cedeño (LinkedIn)</a></li>
+            </ul>
+            <p class="copyright">&copy; 2025 Juan Guzman y Gladys Cedeño - Articulos de ambito cientificos sobre salud e Inteligencia artificial - Todos los derechos reservados</p>
+        </div>
+    </footer>
 
     <script>
-        // Script para cargar los artículos desde articulos.json
-        fetch('articulos.json') // Solicita el archivo articulos.json
+        fetch('articulos.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error al cargar articulos.json: ' + response.statusText);
                 }
-                return response.json(); // Convierte la respuesta a JSON
+                return response.json();
             })
             .then(articulos => {
-                const listaArticulosElemento = document.getElementById('lista-articulos');
-                if (articulos.length === 0) {
-                    listaArticulosElemento.innerHTML = '<li>No hay artículos disponibles por el momento.</li>';
+                const contenedorArticulos = document.getElementById('contenedor-articulos');
+                if (!articulos || articulos.length === 0) {
+                    contenedorArticulos.innerHTML = '<p>No hay artículos disponibles por el momento.</p>';
                     return;
                 }
 
                 articulos.forEach(articulo => {
-                    const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = articulo.carpeta + '/'; // Asume que dentro de cada carpeta hay un index.html
-                    link.textContent = articulo.titulo;
-                    
-                    // Opcional: Añadir descripción
-                    // const description = document.createElement('p');
-                    // description.textContent = articulo.descripcion;
-                    // description.style.fontSize = '0.9em';
-                    // description.style.color = '#555';
+                    const card = document.createElement('div');
+                    card.className = 'articulo-card';
 
-                    listItem.appendChild(link);
-                    // listItem.appendChild(description); // Descomentar si usas la descripción
-                    listaArticulosElemento.appendChild(listItem);
+                    const titleElement = document.createElement('h3');
+                    const linkElement = document.createElement('a');
+                    let carpetaNormalizada = articulo.carpeta;
+                    if (carpetaNormalizada.endsWith('/')) {
+                        carpetaNormalizada = carpetaNormalizada.slice(0, -1);
+                    }
+                    linkElement.href = carpetaNormalizada + '/' + articulo.archivoHtml;
+                    linkElement.textContent = articulo.titulo;
+                    titleElement.appendChild(linkElement);
+
+                    const descriptionElement = document.createElement('p');
+                    descriptionElement.textContent = articulo.descripcion || "Haz clic para leer más sobre este artículo.";
+
+                    const readMoreLink = document.createElement('a');
+                    readMoreLink.href = carpetaNormalizada + '/' + articulo.archivoHtml;
+                    readMoreLink.className = 'leer-mas';
+                    readMoreLink.textContent = 'Leer resumen';
+
+                    card.appendChild(titleElement);
+                    card.appendChild(descriptionElement);
+                    card.appendChild(readMoreLink);
+
+                    contenedorArticulos.appendChild(card);
                 });
             })
             .catch(error => {
                 console.error('Error al procesar los artículos:', error);
-                const listaArticulosElemento = document.getElementById('lista-articulos');
-                listaArticulosElemento.innerHTML = '<li>Ocurrió un error al cargar la lista de artículos.</li>';
+                const contenedorArticulos = document.getElementById('contenedor-articulos');
+                contenedorArticulos.innerHTML = `<p>Ocurrió un error al cargar la lista de artículos. Detalles: ${error.message}</p>`;
             });
     </script>
 </body>

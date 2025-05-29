@@ -1,8 +1,9 @@
 [
+
     {
-      "titulo": "Análisis Comparativo de Salud Digital: Estonia, México, Panamá",
-      "descripcion": "Un resumen sobre los últimos desarrollos en salud digital en Estonia, México y Panamá.",
-      "carpeta": "analisis_comparativo"
+      "titulo": "Análisis Comparativo de Salud",
+      "descripcion": "Explorando datos de salud comparativos en diferentes partes del mundo.",
+      "carpeta": "Análisis Comparativo de salud", 
+      "archivoHtml": "analisis_comparativo.html" 
     }
-    
   ]
